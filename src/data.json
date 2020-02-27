@@ -1,0 +1,41 @@
+[        {
+            "objectID": 1,
+            "day": "Monday",
+            "lowTemperature": 30,
+            "highTemperature": 45,
+            "observation": "observation",
+            "icons": "cloud"
+        },
+         {
+            "objectID": 2,
+            "day": "Tuesday",
+            "lowTemperature": 20,
+            "highTemperature": 40,
+            "observation": "observation",
+            "icons": "cloud"
+        },
+         {
+            "objectID": 3,
+            "day": "Wednesday",
+            "lowTemperature": 10,
+            "highTemperature": 55,
+            "observation": "observation",
+            "icons": "cloud"
+        },
+         {
+            "objectID": 4,
+            "day": "Thursday",
+            "lowTemperature": 30,
+            "highTemperature": 65,
+            "observation": "observation",
+            "icons": "cloud"
+        },
+          {
+            "objectID": 5,
+            "day": "Friday",
+            "lowTemperature": 35,
+            "highTemperature": 75,
+            "observation": "observation",
+            "icons": "cloud"
+        }
+]
