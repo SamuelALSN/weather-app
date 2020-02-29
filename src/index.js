@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker'
 const Root = () => (
     <BrowserRouter>
         <Switch>
-            <Route exact path='/previsions' component={App} />
+            <Route exact path='/' component={App} />
             <Route
                 path='/previsions/:id'
                 render={({ match }) => <SingleCard match={match} />}

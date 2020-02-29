@@ -14,23 +14,23 @@ class Card extends Component {
         return (
             <div className="card-wrapper">
                 {Array.isArray(list) ?
-                    list.map(item =>
-                     new Date(item.dt_txt).getHours() === 15 &&
+                    list.map((item, i) =>
 
-                        <section key={item.dt} className="card anim-flip">
+                        <section key={i} className="card anim-flip">
                             <header>
-                                <h1 className="card-header">{this.getDay(item.dt_txt)}</h1>
+                                <h1 className="card-header">{this.getDay(item.valid_date)}</h1>
                             </header>
-                            <p className="card-temp box-highlight">{item.main.temp_max}</p>
-                            <p className="card-temp box-highlight">{item.main.temp_min}</p>
+                            <p className="card-temp box-highlight">{item.min_temp}</p>
+                            <p className="card-temp box-highlight">{item.max_temp}</p>
                             <div className="icon">
                                 <div className="cloud-group">
-                                    <img src={require(`../images/${item.weather[0].icon}.svg`)} alt="" />
-                                </div>
+                                    <img src={`https://www.weatherbit.io/static/img/icons/${item.weather.icon}.png`} alt=""/>
+                                </div> 
+                                
                             </div>
-                            <p className="card-info"></p>
+                            <p className="card-info">{item.weather.description}</p>
                             <span>
-                                <Link to={`/previsions/${item.dt}`}> Voir </Link>
+                                <Link to={`/previsions/${item.dt}`}>Touch</Link>
                             </span>
                         </section>
 
