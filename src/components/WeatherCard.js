@@ -24,13 +24,13 @@ class Card extends Component {
                             <p className="card-temp box-highlight">{item.max_temp}</p>
                             <div className="icon">
                                 <div className="cloud-group">
-                                    <img src={`https://www.weatherbit.io/static/img/icons/${item.weather.icon}.png`} alt=""/>
+                                    <img src={`https://www.weatherbit.io/static/img/icons/${item.weather.icon}.png`} alt={item.weather.description}/>
                                 </div> 
                                 
                             </div>
                             <p className="card-info">{item.weather.description}</p>
                             <span>
-                                <Link to={`/previsions/${item.dt}`}>Touch</Link>
+                                <Link to={`/previsions/${item.valid_date}`}>Touch</Link>
                             </span>
                         </section>
 
