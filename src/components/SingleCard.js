@@ -1,59 +1,52 @@
 import React, { Component } from 'react';
-import data from '../data.json'
+import axios from 'axios'
+const APPID = 'dc938a560c7c42ac9102fe9c0baba58f'
 
 class SingleCard extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            result: null
+            results: null
         }
-        this.searchUniqueCards = this.searchUniqueCards.bind(this)
     }
 
-    searchUniqueCards() {
-        let  results;
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].objectID === parseInt(this.props.match.params.id)) {
-                results = data[i]
-            }
-        }
-        return results
+
+    componentDidUpdate() {
+        axios.get(`https://api.weatherbit.io/v2.0/forecast/daily?city=Lomé&country=TOGO&days=5&key=${APPID}`)
+            .then(result => this.setState({
+                results: result.data.data
+            }))
+            .catch(error => error)
+
     }
     
-    UNSAFE_componentWillMount(){
-        const myResults = this.searchUniqueCards()
-        this.setState({
-            result: myResults
-        }) 
-    }
-    // componentDidMount() {
-    //  const myResults = this.searchUniqueCards()
-
-    //     this.setState({
-    //         result: myResults
-    //     })
-    //     // console.log(this.state)
-    // }
     render() {
-        const { result } = this.state
-        console.log(result)
+        const { results } = this.state
+        console.log(results)
         return (
             <div className='card-wrapper'>
-                <section key={result.objectID} className="card anim-flip">
-                    <header>
-                        <h1 className="card-header">{result.day}</h1>
-                    </header>
-                    <p className="card-temp box-highlight">{result.highTemperature}</p>
-                    <p className="card-temp box-highlight">{result.lowTemperature}</p>
-                    <div className="icon">
-                        <div className="cloud-group">
-                            <span className="icon-cloud cloud-circle shadow-cloud-clip"></span>
-                            <span className="icon-cloud cloud-base shadow-cloud-clip"></span>
-                        </div>
-                    </div>
-                    <p className="card-info">{result.observation}</p>
-                </section>
+                { 
+                    results.map((item, i) =>
+                        item.valid_date === this.props.params.id &&
+                        <section key={i} className="card anim-flip">
+                            <header>
+                                <h1 className="card-header">{this.getDay(item.valid_date)}</h1>
+                            </header>
+                            <p className="card-temp box-highlight">{item.min_temp}</p>
+                            <p className="card-temp box-highlight">{item.max_temp}</p>
+                            <div className="icon">
+                                <div className="cloud-group">
+                                    <img src={`https://www.weatherbit.io/static/img/icons/${item.weather.icon}.png`} alt={item.weather.description} />
+                                </div>
+
+                            </div>
+                            <p className="card-info">{item.weather.description}</p>
+                        </section>
+
+                    )
+                }
+                
             </div>
         );
     }
